@@ -74,3 +74,7 @@ Separately Installtion of Components
     ```bash
     kubectl apply -f k8s/metric-server/metric-server-manifest.yaml
     ```
+
+### ✨Happy Coding✨
+
+(C)un1xman
