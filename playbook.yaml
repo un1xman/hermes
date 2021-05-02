@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: true
+  gather_facts: yes
+  vars_files:
+     - vars/GlobalVars.yml
+  tasks:
+    - include: included/metric-server-installation.yaml
+    - include: included/prometheus-installation.yaml
+    - include: included/grafana_installation.yaml

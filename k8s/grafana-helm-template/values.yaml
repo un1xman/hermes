@@ -1,0 +1,64 @@
+objectName: grafana
+replicaCount: 1
+ImageName: grafana/grafana:latest
+containerPort: 3000
+service:
+  type: ClusterIP
+  port: 80
+
+ingress: 
+  enabled: false
+  hostname: testgrafana.un1xman.local
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+
+pvc:
+  name: grafana
+  accessMode: ReadWriteOnce
+  storageSize: "1Gi"
+  storageclassname: glusterfs-heketi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

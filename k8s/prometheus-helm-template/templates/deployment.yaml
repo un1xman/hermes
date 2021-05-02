@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.objectName }}-deployment
+  labels:
+    app: {{ .Values.objectName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.objectName }}
+  template:
+    metadata:
+      annotations:
+        rollme: "xmY0V"
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - name: {{ .Values.objectName }}-image
+          image: {{ .Values.ImageName }}
+          args:          
+            
+              - --config.file
+            
+              - /etc/prometheus/prometheus.yml
+            
+              - --storage.tsdb.path
+            
+              - /prometheus/
+
+              - --web.enable-admin-api 
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-config-name
+              mountPath: /prometheus/
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: {{ .Values.objectName }}-config
+        - name: prometheus-config-name
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvc.name }}

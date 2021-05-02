@@ -1,0 +1,9 @@
+- name: Installation of Grafana helm-template to K8S 
+  community.kubernetes.helm:
+    name: grafana 
+    atomic: yes
+    create_namespace: yes
+    kubeconfig: "{{ KUBECONFIG }}"
+    chart_ref: ./k8s/grafana-helm-template
+    release_namespace: monitoring 
+    values_files: ./k8s/grafana-helm-template/values.yaml

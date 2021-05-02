@@ -1,0 +1,5 @@
+- name: Apply metrics-server manifest to the cluster.
+  community.kubernetes.k8s:
+    state: present
+    kubeconfig: "{{ KUBECONFIG }}"
+    src: ./k8s/metric-server/metric-server-manifest.yaml

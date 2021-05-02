@@ -1,0 +1,15 @@
+- name: Change endpoint of Metric Server
+  environment:
+    KUBECONFIG: "{{ KUBECONFIG }}"
+  shell: |
+    sed -i "s/domainName/$(kubectl config current-context | cut -d"@" -f2)/g" ./k8s/prometheus-helm-template/templates/configmap.yaml 
+
+- name: Installation of Prometheus helm-template to K8S 
+  community.kubernetes.helm:
+    name: prometheus 
+    atomic: yes
+    create_namespace: yes
+    kubeconfig: "{{ KUBECONFIG }}"
+    chart_ref: ./k8s/prometheus-helm-template
+    release_namespace: monitoring 
+    values_files: ./k8s/prometheus-helm-template/values.yaml
